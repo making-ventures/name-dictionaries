@@ -36,14 +36,14 @@ const englishSurnames = getEnglishSurnames(); // ["Smith", "Jones", ...]
 
 ### Russian Names
 
-- `getRussianMaleNames()` - 2,437 male first names
-- `getRussianFemaleNames()` - 2,437 female first names
+- `getRussianMaleNames()` - 3,357 male first names
+- `getRussianFemaleNames()` - 1,434 female first names
 - `getRussianNames()` - Returns `{ male: string[], female: string[] }`
 
 ### Russian Surnames
 
-- `getRussianMaleSurnames()` - Male surnames (includes unisex)
-- `getRussianFemaleSurnames()` - Female surnames (includes unisex)
+- `getRussianMaleSurnames()` - 34,804 male surnames (23,972 + 10,832 unisex)
+- `getRussianFemaleSurnames()` - 24,358 female surnames (13,526 + 10,832 unisex)
 - `getRussianSurnames()` - Returns `{ male: string[], female: string[] }`
 
 ### English Names
