@@ -4,7 +4,7 @@
   "description": "Russian and English name dictionaries for data generation",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mkven/name-dictionaries.git"
+    "url": "https://github.com/making-ventures/name-dictionaries.git"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
