@@ -62,6 +62,14 @@ const englishSurnames = getEnglishSurnames(); // ["Smith", "Jones", ...]
 - English names: US Baby Names 2000s
 - English surnames: England & Wales surnames
 
+## Maintenance notes
+
+### `minimumReleaseAgeExclude` in `pnpm-workspace.yaml`
+
+pnpm refuses to install packages younger than its `minimumReleaseAge` threshold. When a freshly-published version is pinned explicitly (e.g. `@types/node@25.9.0`), pnpm records it under `minimumReleaseAgeExclude` so installs remain reproducible.
+
+This entry is temporary: once the listed version is older than the threshold (typically a week or two after publish), remove the corresponding line and run `pnpm install` to confirm the install still succeeds without it.
+
 ## License
 
 MIT
