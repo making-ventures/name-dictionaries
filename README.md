@@ -46,6 +46,25 @@ const englishSurnames = getEnglishSurnames(); // ["Smith", "Jones", ...]
 - `getRussianFemaleSurnames()` - 24,358 female surnames (13,526 + 10,832 unisex)
 - `getRussianSurnames()` - Returns `{ male: string[], female: string[] }`
 
+### Russian Patronymics
+
+Generated dynamically from male first names. Both list getters and a generator function for ad-hoc names are exported.
+
+- `getRussianMalePatronymics()` - male patronymics derived from all male first names (deduplicated)
+- `getRussianFemalePatronymics()` - female patronymics derived from all male first names (deduplicated)
+- `getRussianPatronymics()` - Returns `{ male: string[], female: string[] }`
+- `generateRussianMalePatronymic(fatherName)` - `"Иван"` → `"Иванович"`
+- `generateRussianFemalePatronymic(fatherName)` - `"Иван"` → `"Ивановна"`
+- `generateRussianPatronymics(fatherName)` - `{ male, female }` from a single father's name
+
+Rules (covers the vast majority of names):
+
+- Hard consonant ending (`Иван`) → `+ович` / `+овна`
+- `-й` ending (`Сергей`) → drop, `+евич` / `+евна`
+- Soft `-ь` ending (`Игорь`) → drop, `+евич` / `+евна`
+- `-а`/`-я` ending (`Никита`) → drop, `+ич` / `+ична`
+- Classic exceptions are handled by lookup: `Илья` → `Ильич`/`Ильинична`, `Лука` → `Лукич`/`Лукинична`, `Кузьма` → `Кузьмич`/`Кузьминична`, `Фома`, `Савва`, etc.
+
 ### English Names
 
 - `getEnglishMaleNames()` - ~10,000 male first names

@@ -1,6 +1,14 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 
+import { generateRussianPatronymics } from "./patronymics.js";
+
+export {
+  generateRussianFemalePatronymic,
+  generateRussianMalePatronymic,
+  generateRussianPatronymics,
+} from "./patronymics.js";
+
 export interface GenderedLists {
   male: string[];
   female: string[];
@@ -10,6 +18,7 @@ let cachedRussianSurnames: GenderedLists | null = null;
 let cachedRussianNames: GenderedLists | null = null;
 let cachedEnglishSurnames: string[] | null = null;
 let cachedEnglishNames: GenderedLists | null = null;
+let cachedRussianPatronymics: GenderedLists | null = null;
 
 function getDataPath(filename: string): string {
   // Works both in development (src/) and published (dist/) because
@@ -104,6 +113,37 @@ export function getRussianFemaleNames(): string[] {
 
 export function getRussianNames(): GenderedLists {
   return getRussianNamesInternal();
+}
+
+// Russian patronymics (generated from male first names)
+function getRussianPatronymicsInternal(): GenderedLists {
+  if (cachedRussianPatronymics === null) {
+    const fathers = getRussianMaleNames();
+    const male = new Set<string>();
+    const female = new Set<string>();
+    for (const father of fathers) {
+      const pair = generateRussianPatronymics(father);
+      male.add(pair.male);
+      female.add(pair.female);
+    }
+    cachedRussianPatronymics = {
+      male: [...male],
+      female: [...female],
+    };
+  }
+  return cachedRussianPatronymics;
+}
+
+export function getRussianMalePatronymics(): string[] {
+  return getRussianPatronymicsInternal().male;
+}
+
+export function getRussianFemalePatronymics(): string[] {
+  return getRussianPatronymicsInternal().female;
+}
+
+export function getRussianPatronymics(): GenderedLists {
+  return getRussianPatronymicsInternal();
 }
 
 // English surnames
