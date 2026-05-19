@@ -1,5 +1,5 @@
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 export interface GenderedLists {
   male: string[];
@@ -12,17 +12,13 @@ let cachedEnglishSurnames: string[] | null = null;
 let cachedEnglishNames: GenderedLists | null = null;
 
 function getDataPath(filename: string): string {
-  // Works both in development (src/) and published (dist/)
-  const devPath = path.join(__dirname, "..", "data", filename);
-  const distPath = path.join(__dirname, "..", "data", filename);
-
-  if (fs.existsSync(devPath)) {
-    return devPath;
+  // Works both in development (src/) and published (dist/) because
+  // `data/` sits one level above both folders.
+  const dataPath = path.join(__dirname, "..", "data", filename);
+  if (!fs.existsSync(dataPath)) {
+    throw new Error(`Dictionary file not found: ${filename}`);
   }
-  if (fs.existsSync(distPath)) {
-    return distPath;
-  }
-  throw new Error(`Dictionary file not found: ${filename}`);
+  return dataPath;
 }
 
 function loadCsvList(filename: string): string[] {
@@ -45,10 +41,7 @@ function loadCsvList(filename: string): string[] {
   return names;
 }
 
-function loadGenderedCsv(
-  filename: string,
-  includeUnisex: boolean
-): GenderedLists {
+function loadGenderedCsv(filename: string, includeUnisex: boolean): GenderedLists {
   const filePath = getDataPath(filename);
   const male: string[] = [];
   const female: string[] = [];

@@ -18,8 +18,16 @@ echo "=== Type checking ==="
 pnpm typecheck
 
 echo ""
+echo "=== Type checking (tests) ==="
+pnpm typecheck:tests
+
+echo ""
 echo "=== Building ==="
 pnpm build
+
+echo ""
+echo "=== Tests ==="
+pnpm test
 
 echo ""
 echo "========================================"

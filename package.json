@@ -2,6 +2,8 @@
   "name": "@mkven/name-dictionaries",
   "version": "0.1.0",
   "description": "Russian and English name dictionaries for data generation",
+  "author": "Damir Manapov",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/making-ventures/name-dictionaries.git"
@@ -12,14 +14,6 @@
     "dist",
     "data"
   ],
-  "scripts": {
-    "build": "tsc",
-    "format": "prettier --write .",
-    "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "prepublishOnly": "pnpm build"
-  },
   "keywords": [
     "names",
     "surnames",
@@ -28,21 +22,34 @@
     "russian",
     "english"
   ],
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "@eslint/js": "^9.39.2",
-    "@types/node": "^22.10.2",
-    "eslint": "^9.17.0",
-    "prettier": "^3.4.2",
-    "typescript": "^5.7.2",
-    "typescript-eslint": "^8.18.1",
-    "vitest": "^4.0.16"
-  },
   "engines": {
     "node": ">=18"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "format": "biome format --write .",
+    "lint": "biome check --error-on-warnings .",
+    "typecheck": "tsc --noEmit",
+    "typecheck:tests": "tsc -p tsconfig.check.json",
+    "build": "tsc",
+    "test": "vitest run",
+    "release": "release-it",
+    "release:dry": "release-it --dry-run",
+    "prepublishOnly": "pnpm build",
+    "prepare": "simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "bash all-checks.sh"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.15",
+    "@release-it/conventional-changelog": "^11.0.0",
+    "@types/node": "^25.9.0",
+    "release-it": "^20.0.1",
+    "simple-git-hooks": "^2.13.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.6"
   }
 }
