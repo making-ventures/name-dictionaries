@@ -44,12 +44,12 @@
     "pre-commit": "bash all-checks.sh"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
+    "@biomejs/biome": "^2.4.16",
     "@release-it/conventional-changelog": "^11.0.0",
-    "@types/node": "^25.9.0",
+    "@types/node": "^25.9.1",
     "release-it": "^20.0.1",
     "simple-git-hooks": "^2.13.1",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.6"
+    "vitest": "^4.1.7"
   }
 }
